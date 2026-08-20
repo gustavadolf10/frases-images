@@ -36,3 +36,20 @@ function resetAutoplay() {
   clearInterval(autoplayInterval);
   autoplayInterval = setInterval(moveCard, 4000);
 }
+
+// REPRODUCCIÓN DE MÚSICA AUTOMÁTICA
+const bgMusic = document.getElementById("bgMusic");
+
+function startAudioOnInteraction() {
+  if (bgMusic) {
+    bgMusic.volume = 0.5;
+    bgMusic.play().catch((error) => {
+      console.log("Esperando interacción:", error);
+    });
+  }
+  document.removeEventListener("click", startAudioOnInteraction);
+  document.removeEventListener("touchstart", startAudioOnInteraction);
+}
+
+document.addEventListener("click", startAudioOnInteraction);
+document.addEventListener("touchstart", startAudioOnInteraction);
